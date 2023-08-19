@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ServerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +16,9 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/',[ProductController::class,'holidaysOfYear']);
+// Route::get('/',[ClientController::class,'productList']);
+// Route::get('/allProducts',[ServerController::class,'allProducts']);
+// Route::get('/',[ProductController::class,'holidaysOfYear']);
 // Route::get('/', function () {
 //     return view('welcome');
 // });
