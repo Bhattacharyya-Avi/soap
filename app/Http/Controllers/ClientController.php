@@ -26,6 +26,7 @@ class ClientController extends Controller
     public function productList()
     {       
         try {
+            // dd($this->soap_instant);
             // $products = $this->soap_instant->allProducts();
             // dd($products);
             // echo "<pre>";
@@ -34,7 +35,7 @@ class ClientController extends Controller
 
             $this->soapWrapper->add('products',function($service){
                 $service 
-                // ->wsdl('http://soap.test/api/allProducts')
+                ->wsdl('http://soap.test/api/allProducts')
                 ->trace(true);
             });
             // dd($this->soapWrapper);

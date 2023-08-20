@@ -18,18 +18,8 @@ class ServerController extends Controller
     
     public function allProducts()
     {
-        $products = Product::all();
-        $data = "<pre>".$products."</pre>";
-        return $data;
-
-        // $params = [
-        //     'uri' => 'http://soap.test/',
-        // ];
-        // $soapServer = new SoapServer(null,$params);
-        // $soapServer->handle();
-        //         $params = array('uri' => 'http://localhost/soap/server.php');
-        // $soapServer = new SoapServer(null, $params);
-        // $soapServer->setClass('server');
-        // $soapServer->handle();
+        $products = Product::all()->toArray();
+        // $data = "<pre>".$products."</pre>";
+        return $products;
     }
 }
