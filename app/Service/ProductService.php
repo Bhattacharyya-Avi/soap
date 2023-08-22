@@ -2,19 +2,18 @@
 
 namespace App\Service;
 
+use App\Models\Product;
+
 class ProductService{
 
-    public $soapClient;
-
-    public function __construct()
+    public function getProductDetails($productId)
     {
-        
-        $this->soapClient = new \SoapClient("http://example.com/weather-api?wsdl");
-    }
-
-    public function getWeather($city)
-    {
-        $response = $this->soapClient->getWeather(['city' => $city]);
-        return $response->getWeatherResult;
+        // Fetch product details from your database based on $productId
+        $product = Product::find($productId);
+        return [
+            'id' => $productId,
+            'name' => $product->name,
+            'price' => $product->price,
+        ];
     }
 }

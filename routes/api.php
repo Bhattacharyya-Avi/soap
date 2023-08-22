@@ -18,12 +18,10 @@ use App\Http\Controllers\CurrencyController;
 |
 */
 
-// Route::post('/test',[ProductController::class,'holidaysOfYear']);
-// Route::post('/products',[ProductController::class,'getWeather']);
-Route::get('/',[ClientController::class,'productList']);
-Route::get('/allProducts',[ServerController::class,'allProducts']);
+// Route::post('/convertCurrency',[CurrencyController::class,'convertCurrency']);
+// // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+// //     return $request->user();
+// // });
 
-Route::post('/convertCurrency',[CurrencyController::class,'convertCurrency']);
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::post('/soap-server', [ServerController::class, 'handleSoapRequest']);
+Route::post('/soap-client', [ClientController::class, 'fetchProductDetails']);
