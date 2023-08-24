@@ -68,17 +68,18 @@ class ClientController extends Controller
         $response = $soapClient->getProductDetails($productId);
         // dd($response);
         $demoresult = ArrayToXml::convert($response);
+        // dd($demoresult);
+        $array = preg_split("/\r\n|\n|\r/", $demoresult); 
 
-        $envelope = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://example.com">';
+        $xmlVersion = $array[0];
+        $envelope = '<SOAP-ENV:Envelope  SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" >';
         $header = $attributeVal['header'];
-        $body = "<soapenv:Body>".$attributeVal['functionNameStart'].$demoresult.$attributeVal['functionNameEnd']."</soapenv:Body>";
-        $footer = '</soapenv:Envelope>';
+        $body = "<SOAP-ENV:Body>".$attributeVal['functionNameStart'].$array[1].$attributeVal['functionNameEnd']."</SOAP-ENV:Body>";
+        $footer = '</SOAP-ENV:Envelope>';
 
-        $responseContent = $envelope . $header . $body . $footer;
+        $responseContent = $xmlVersion . $envelope . $header . $body . $footer;
 
         return response($responseContent)->header('Content-Type', 'text/xml; charset=utf-8');
-
-        return $demoresult;
     }
 
     public function getFunctionNameAndAttribute($requestXml)
@@ -92,7 +93,7 @@ class ClientController extends Controller
 
         $data = [
             'id' => $attributeValue,
-            'header' => '<soapenv:Header>' . $xml->children('SOAP-ENV', true)->Header . '</soapenv:Header>',
+            'header' => '<SOAP-ENV:Header>' . $xml->children('SOAP-ENV', true)->Header . '</SOAP-ENV:Header>',
             'functionNameStart' => "<".$functionName."Response>",
             'functionNameEnd' => "</".$functionName."Response>",
         ];
